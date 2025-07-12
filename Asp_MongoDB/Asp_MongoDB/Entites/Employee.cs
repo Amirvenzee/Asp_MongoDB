@@ -11,10 +11,15 @@ namespace Asp_MongoDB.Entites
         public Guid id { get; set; }
 
         [BsonElement("FirstName")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
+
         public string BigName => Name.ToUpper();
+
+        [BsonIgnoreIfNull]
         public float Mark { get; set; }
+
         public int Age { get; set; }
+
 
     }
 }
