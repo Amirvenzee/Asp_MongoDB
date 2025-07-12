@@ -1,0 +1,59 @@
+﻿@model List<Person>
+
+@{
+    ViewData["Title"] = "TEST23";
+    
+}
+
+<h1 style="font:bold;color:red;">لیست</h1>
+
+
+<p>
+    <a asp-action="create"  class="btn btn-primary">ویرایش</a> |
+    <a asp-action="Create"  class="btn btn-success">Create New</a>
+</p>
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+
+            <th>
+                نام
+            </th>
+
+              <th>
+                  معدل
+            </th>
+              <th>
+                سن
+            </th>
+            <th>
+               اسم بزرگ
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+       <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dgree)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BigName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary" >ویرایش</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success ">مشخصات</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger ">حذف</a>
+                </td>                                           
+       </tr>
+}
+    </tbody>
+</table>

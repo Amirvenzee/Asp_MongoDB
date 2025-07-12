@@ -1,8 +1,17 @@
+using Asp_MongoDB.Models;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var services = builder.Services;
 
+services.Configure<MongoSettings>(builder.Configuration.GetSection("MongoSettings"));
+
+services.AddSingleton<MongoSettings>(x =>
+    x.GetRequiredService<IOptions<MongoSettings>>().Value
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,7 +31,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Employee}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
