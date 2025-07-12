@@ -20,7 +20,7 @@ namespace Asp_MongoDB.Services
 
         public async Task Delete(Guid Id)
         {
-           await _employee.DeleteOneAsync(x => x.id == Id);
+           await _employee.DeleteOneAsync(x => x.Id == Id);
         }
 
         public async Task<List<Employee>> GetAll()
@@ -30,12 +30,12 @@ namespace Asp_MongoDB.Services
 
         public async Task<Employee> GetById(Guid Id)
         {
-            return await  _employee.Find(x => x.id == Id).FirstOrDefaultAsync();
+            return await  _employee.Find(x => x.Id == Id).FirstOrDefaultAsync();
         }
 
         public async Task Update(Employee employee)
         {
-            await _employee.ReplaceOneAsync(x => x.id == employee.id, employee);
+            await _employee.ReplaceOneAsync(x => x.Id == employee.Id, employee);
         }
     }
 }
