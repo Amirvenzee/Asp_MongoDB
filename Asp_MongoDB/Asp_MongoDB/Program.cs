@@ -12,9 +12,8 @@ services.AddScoped<IEmployeeService, EmployeeService>();
 
 services.Configure<MongoSettings>(builder.Configuration.GetSection("MongoSettings"));
 
-services.AddSingleton<MongoSettings>(x =>
-    x.GetRequiredService<IOptions<MongoSettings>>().Value
-);
+services.AddSingleton<MongoSettings>
+    (x => x.GetRequiredService<IOptions<MongoSettings>>().Value);
 
 
 var app = builder.Build();
