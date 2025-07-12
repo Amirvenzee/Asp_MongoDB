@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Asp_MongoDB.Entites
 {
-    public class Student
+    public class Employee
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
