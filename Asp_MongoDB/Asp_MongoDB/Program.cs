@@ -1,4 +1,5 @@
 using Asp_MongoDB.Models;
+using Asp_MongoDB.Services;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 var services = builder.Services;
+
+services.AddScoped<IEmployeeService, EmployeeService>();
 
 services.Configure<MongoSettings>(builder.Configuration.GetSection("MongoSettings"));
 

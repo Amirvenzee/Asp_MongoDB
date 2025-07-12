@@ -1,52 +1,94 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp_MongoDB.Entites;
+using Asp_MongoDB.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Asp_MongoDB.Controllers
 {
     public class EmployeeController : Controller
     {
-        public IActionResult Index()
+        private readonly IEmployeeService _employeeService;
+        public EmployeeController(IEmployeeService employeeService)
         {
-            return View();
+            _employeeService = employeeService;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+           var employeeList = await _employeeService.GetAll();
+            return View(employeeList);
+        }
+        [HttpGet]
+
+        public  async Task<IActionResult> Details(Guid id)
+        {
+            var employee = await _employeeService.GetById(id);
+            if(employee != null )
+               return View(employee);
+
+            return NotFound();
         }
 
-        public IActionResult Details()
-        {
-            return View();
-        }
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Create()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Employee employee)
         {
-            return View();
+            if(!ModelState.IsValid)
+                return BadRequest();
+
+           await _employeeService.Create(employee);
+
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Edit()
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid Id)
         {
-            return View();
+            var oldEmployee = await _employeeService.GetById(Id);
+
+            if(oldEmployee != null)
+
+                return View(oldEmployee);
+
+            return NotFound();
+
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Employee employee)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+               await _employeeService.Update(employee);
+
+              return RedirectToAction("Index");
+            }
+            else
+            {
+                return BadRequest();
+            }
+            
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var employee = await _employeeService.GetById(id);
+            return View(employee);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteEmployee(Guid id)
+        {
+           await _employeeService.Delete(id);
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Delete()
-        {
-            return View();
-        }
-
-        public IActionResult DeleteEmployee()
-        {
-            return View();
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }
