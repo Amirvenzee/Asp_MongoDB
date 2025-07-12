@@ -12,6 +12,8 @@ services.Configure<MongoSettings>(builder.Configuration.GetSection("MongoSetting
 services.AddSingleton<MongoSettings>(x =>
     x.GetRequiredService<IOptions<MongoSettings>>().Value
 );
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
