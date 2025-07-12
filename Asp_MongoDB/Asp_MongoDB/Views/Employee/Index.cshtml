@@ -1,15 +1,15 @@
-﻿@model List<Person>
+﻿@model List<Employee>
 
 @{
     ViewData["Title"] = "TEST23";
     
 }
 
-<h1 style="font:bold;color:red;">لیست</h1>
+<h1 style="font:bold;color:red;">لیست کارمند ها</h1>
 
 
 <p>
-    <a asp-action="create"  class="btn btn-primary">ویرایش</a> |
+    
     <a asp-action="Create"  class="btn btn-success">Create New</a>
 </p>
 <table class="table table-bordered text-center">
@@ -40,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Dgree)
+                    @Html.DisplayFor(modelItem => item.Mark)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Age)
