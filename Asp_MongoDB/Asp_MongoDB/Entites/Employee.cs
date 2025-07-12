@@ -8,7 +8,7 @@ namespace Asp_MongoDB.Entites
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
 
         [BsonElement("FirstName")]
         public required string Name { get; set; }
