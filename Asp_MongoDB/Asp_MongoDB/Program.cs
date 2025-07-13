@@ -10,8 +10,8 @@ var services = builder.Services;
 
 services.AddScoped<IEmployeeService, EmployeeService>();
 
+//Mongo Base
 services.Configure<MongoSettings>(builder.Configuration.GetSection("MongoSettings"));
-
 services.AddSingleton<MongoSettings>
     (x => x.GetRequiredService<IOptions<MongoSettings>>().Value);
 
