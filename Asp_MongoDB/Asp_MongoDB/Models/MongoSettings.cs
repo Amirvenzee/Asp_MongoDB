@@ -2,6 +2,7 @@
 {
     public class MongoSettings
     {
+        //MonogoDbDatabaseName
         public string DatabaseName { get; set; }
         public string ConnectionString { get; set; }
     }
